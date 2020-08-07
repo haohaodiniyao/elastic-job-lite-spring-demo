@@ -15,6 +15,9 @@ public class ElasticJobParamVo {
 
     private SimpleJob jobClass;
 
+    /**
+     * cron表达式，用于控制作业触发时间
+     */
     private String cron;
 
     /**

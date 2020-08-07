@@ -3,13 +3,6 @@ package com.example.annotation;
 
 import java.lang.annotation.*;
 
-/**
- * @ClassName ElasticSchedulerParam
- * @Description: 功能描述
- * @Author: byl
- * @Date: 2020/6/16
- * @Version 1.0
-*/
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited

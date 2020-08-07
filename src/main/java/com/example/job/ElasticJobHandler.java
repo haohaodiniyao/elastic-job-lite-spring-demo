@@ -24,19 +24,18 @@ public class ElasticJobHandler {
      * @param elasticJobParamVo
      */
     public void addJob(ElasticJobParamVo elasticJobParamVo) {
-
-        LiteJobConfiguration jobConfig = LiteJobConfiguration.newBuilder(new SimpleJobConfiguration(
-                        JobCoreConfiguration.newBuilder(elasticJobParamVo.getJobName(),
-                                elasticJobParamVo.getCron(),
-                                elasticJobParamVo.getShardingTotalCount())
-                                .shardingItemParameters(elasticJobParamVo.getShardingItemParameters())
-                                .description(elasticJobParamVo.getDescription())
-                                .misfire(elasticJobParamVo.isMisfire())
-                                .failover(elasticJobParamVo.isFailover())
-                                //.jobProperties("job_exception_handler", "XXXXHandler")
-                                .build()
-                        , elasticJobParamVo.getClassFullPath())
-        ).overwrite(true)
+        JobCoreConfiguration jobCoreConfiguration = JobCoreConfiguration.newBuilder(elasticJobParamVo.getJobName(),
+                elasticJobParamVo.getCron(),
+                elasticJobParamVo.getShardingTotalCount())
+                .shardingItemParameters(elasticJobParamVo.getShardingItemParameters())
+                .description(elasticJobParamVo.getDescription())
+                .misfire(elasticJobParamVo.isMisfire())
+                .failover(elasticJobParamVo.isFailover())
+                //.jobProperties("job_exception_handler", "XXXXHandler")
+                .build();
+        SimpleJobConfiguration simpleJobConfiguration = new SimpleJobConfiguration(jobCoreConfiguration, elasticJobParamVo.getClassFullPath());
+        LiteJobConfiguration jobConfig = LiteJobConfiguration.newBuilder(simpleJobConfiguration)
+                .overwrite(true)
                 .disabled(elasticJobParamVo.isDisabled())
                 .build();
 

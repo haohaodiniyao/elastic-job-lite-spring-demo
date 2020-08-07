@@ -1,0 +1,5 @@
+zookeeper.serverLists: 127.0.0.1:2181
+zookeeper.namespace: job123
+zookeeper.maxRetries: 4
+server:
+  port: 8181
